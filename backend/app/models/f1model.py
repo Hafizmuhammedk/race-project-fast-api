@@ -61,7 +61,7 @@ class Winner_year(Base):
     __tablename__ = "winner_year"
     winner_id = Column(Integer, ForeignKey("winner.id"))
     position = Column(Integer, nullable=False)
-    racer_id = Column(Integer, ForeignKey("racers.id"))
+    racers_id = Column(Integer, ForeignKey("racers.id"))
     point = Column(Integer, nullable=False)
 
     winner = relationship("Winner", back_populates="winner_year")
