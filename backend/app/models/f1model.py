@@ -16,7 +16,7 @@ class Track(Base):
 class Team(Base):
     __tablename__ = "team"
     id = Column(Integer, primary_key=True, index=True)
-    name = Column(String, nullable=False)
+    name = Column(String(length=15), nullable=False)
 
     car_team = relationship("car_team", back_populates="Team")
     team = relationship("racers", back_populates="Team")
