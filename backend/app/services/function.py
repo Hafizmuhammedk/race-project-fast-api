@@ -4,7 +4,7 @@ from models.track import Track
 
 
 def creat_track(db: Session, track_data):
-    db_track = Track(name=track_data.name, lenght=track_data.lenght,
+    db_track = Track(name=track_data.name, length=track_data.length,
                      laps=track_data.laps)
     db.add(db_track)
     db.commit()

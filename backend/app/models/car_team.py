@@ -8,7 +8,7 @@ class Car(Base):
     id = Column(Integer, primary_key=True, index=True)
     model = Column(String, nullable=False)
 
-    car_team = relationship("car_team", back_populates="Car")
+    car_team = relationship("Car_team", back_populates="car")
 
 
 class Team(Base):

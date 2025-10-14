@@ -3,7 +3,7 @@ from pydantic import BaseModel
 
 class TrackCreate(BaseModel):
     name: str
-    lenght: float
+    length: float
     laps: int
 
 
