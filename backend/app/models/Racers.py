@@ -1,8 +1,6 @@
 from sqlalchemy import Column, Integer, String, ForeignKey
-from sqlalchemy.ext.declarative import declarative_base
+from config.database import Base
 from sqlalchemy.orm import relationship
-
-Base = declarative_base()
 
 
 class Racers(Base):

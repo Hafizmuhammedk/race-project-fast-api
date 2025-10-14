@@ -1,12 +1,16 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-import os
+from config.settings import settings
 from dotenv import load_dotenv
+from sqlalchemy.ext.declarative import declarative_base
 
 load_dotenv()
-db_url = os.getenv("db_url")
 
-engine = create_engine(db_url)
+
+Base = declarative_base()
+
+
+engine = create_engine(settings.DATABASE_URL)
 sessionlocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
 

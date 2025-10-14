@@ -1,8 +1,7 @@
 from pydantic import BaseModel
 
 
-class Track(BaseModel):
-    id: int
+class TrackCreate(BaseModel):
     name: str
     lenght: float
     laps: int
