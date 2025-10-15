@@ -16,14 +16,15 @@ class Team(Base):
     id = Column(Integer, primary_key=True, index=True)
     name = Column(String(length=15), nullable=False)
 
-    car_team = relationship("car_team", back_populates="Team")
-    team = relationship("racers", back_populates="Team")
+    car_team = relationship("Car_team", back_populates="team")
+    racers = relationship("Racers", back_populates="team")
 
 
 class Car_team(Base):
     __tablename__ = "car_team"
-    team_id = Column(Integer, ForeignKey("team.id"), primary_key=True)
-    car_id = Column(Integer, ForeignKey("car.id"), primary_key=True)
+    id = Column(Integer, primary_key=True, index=True)
+    team_id = Column(Integer, ForeignKey("team.id"))
+    car_id = Column(Integer, ForeignKey("car.id"))
 
     car = relationship("Car", back_populates="car_team")
-    team = relationship("Team", back_populates="car_taem")
+    team = relationship("Team", back_populates="car_team")

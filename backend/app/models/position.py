@@ -13,10 +13,11 @@ class Position(Base):
 
 class Position_year(Base):
     __tablename__ = "position_year"
-    winner_id = Column(Integer, ForeignKey("position.id"), primary_key=True)
+    id = Column(Integer, primary_key=True, index=False)
+    winner_id = Column(Integer, ForeignKey("position.id"))
     position = Column(Integer, nullable=False)
-    racers_id = Column(Integer, ForeignKey("racers.id"), primary_key=True)
+    racers_id = Column(Integer, ForeignKey("racers.id"))
     point = Column(Integer, nullable=False)
 
-    position_year = relationship("Position", back_populates="position_year")
-    racer = relationship("Racers", back_populates="position_year")
+    position = relationship("Position", back_populates="position_year")
+    racers = relationship("Racers", back_populates="position_year")

@@ -7,7 +7,7 @@ class Racers(Base):
     __tablename__ = "racers"
     id = Column(Integer, primary_key=True, index=True)
     name = Column(String(length=15), nullable=False)
-    team = Column(Integer, ForeignKey("team.id"))
+    team_id = Column(Integer, ForeignKey("team.id"))
 
-    position_year = relationship("position_year", back_populates="Racers")
+    position_year = relationship("Position_year", back_populates="racers")
     team = relationship("Team", back_populates="racers")
