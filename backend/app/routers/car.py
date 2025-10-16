@@ -8,6 +8,8 @@ from services.car_management import (
     Create_Car,
     Get_car,
     Get_Car_by,
+    Update_Car,
+    Delete_car
 )
 
 router = APIRouter()
@@ -44,3 +46,32 @@ def car_by_id(car_id: int, db: Session = Depends(get_db)):
             {"error": f"not found:{str(e)}"},
             status_code=404
         )
+
+
+@router.put("/car", response_model=Car)
+def update_car(car_id: int, car_update: Car,
+               db: Session = Depends(get_db)):
+    try:
+        db_car = Update_Car(db, car_id, car_update)
+        if not db_car:
+            return {"message": "car not updated"}
+        return JSONResponse({"message": "updated Successfully"},
+                            status_code=200)
+    except Exception as e:
+        return JSONResponse(
+            {"error": f"not updated:{str(e)}"},
+            status_code=404
+        )
+
+
+@router.delete("/car")
+def delete_car(car_id: int, db: Session = Depends(get_db)):
+    try:
+        db_car = Delete_car(db, car_id)
+        if not db_car:
+            return {"message": "car not found"}
+        return JSONResponse({"message": "deleted Successfully"},
+                            status_code=200)
+    except Exception as e:
+        return JSONResponse(detail={"error": f"Error in deleting:{str(e)}"},
+                            status_code=404)

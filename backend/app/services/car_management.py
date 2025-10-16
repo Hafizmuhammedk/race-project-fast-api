@@ -33,3 +33,26 @@ def Get_Car_by(db: Session, car_id: int):
     except Exception as e:
         print(f"notfounded: {str(e)}")
         raise e
+
+
+def Update_Car(db: Session, car_id: int,
+               car_update: schemas.Car):
+    try:
+        db_car = db.query(Car).filter(Car.id == car_id).first()
+        if db_car:
+            db_car.model = car_update.model
+            db.commit()
+            db.refresh(db_car)
+        return db_car
+    except Exception as e:
+        print(f"car not updated: {str(e)}")
+        raise e
+
+
+def Delete_car(db: Session, car_id: int):
+    try:
+        db.query(Car).filter(Car.id == car_id).delete()
+        db.commit()
+    except Exception as e:
+        print(f'Error in Delete Team : {str(e)}')
+        raise e
