@@ -27,7 +27,7 @@ def get_team(db: Session = Depends(get_db)):
 
 
 @router.get("/team/{team_id}", response_model=Team)
-def read_rack_by_id(team_id: int, db: Session = Depends(get_db)):
+def team_by_id(team_id: int, db: Session = Depends(get_db)):
     return Get_team_by(db, team_id)
 
 
