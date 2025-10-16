@@ -7,13 +7,13 @@ class TrackCreate(BaseModel):
     laps: int
 
 
+class Team(BaseModel):
+    name: str
+
+
 class Racer(BaseModel):
     name: str
     team: str
-
-
-class Team(BaseModel):
-    name: str
 
 
 class Car(BaseModel):

@@ -16,6 +16,13 @@ def Get_Track(db: Session):
     return db.query(Track).all()
 
 
+def Get_Track_by(db: Session, track_id: int):
+    db_track_id = db.query(Track).filter(Track.id == track_id).first()
+    if not db_track_id:
+        return None
+    return db_track_id
+
+
 def Update_Track(db: Session, track_id: int,
                  track_update: schemas.TrackCreate):
     db_track = db.query(Track).filter(Track.id == track_id).first()
@@ -29,7 +36,8 @@ def Update_Track(db: Session, track_id: int,
 
 
 def Delete_Track(db: Session, track_id: int):
-    db_track = db.query(Track).filter(track_id == track_id).first()
+    db_track = db.query(Track).filter(Track.id == track_id).first()
     if db_track:
         db.delete(db_track)
+        db.commit()
     return db_track
