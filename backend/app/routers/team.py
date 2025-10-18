@@ -1,10 +1,10 @@
 from fastapi import APIRouter, Depends, HTTPException  # responses
 from fastapi.responses import JSONResponse
-from config.database import get_db
-from schema.schemas import Team
+from app.config.database import get_db
+from app.schema.schemas import Team
 from sqlalchemy.orm import Session
 from typing import List
-from services.team_management import (
+from app.services.team_management import (
     Create_Team,
     Get_Team,
     Get_team_by,

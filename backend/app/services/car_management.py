@@ -1,6 +1,6 @@
 from sqlalchemy.orm import Session
-from schema import schemas
-from models.car_team import Car
+from app.schema import schemas
+from app.models.car_team import Car
 
 
 def Create_Car(db: Session, car_data):

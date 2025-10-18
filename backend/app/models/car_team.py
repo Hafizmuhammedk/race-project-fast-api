@@ -1,5 +1,5 @@
 from sqlalchemy import Column, Integer, String, ForeignKey
-from config.database import Base
+from app.config.database import Base
 from sqlalchemy.orm import relationship
 
 
@@ -23,8 +23,8 @@ class Team(Base):
 class Car_team(Base):
     __tablename__ = "car_team"
     id = Column(Integer, primary_key=True, index=True)
-    team_id = Column(Integer, ForeignKey("team.id"))
-    car_id = Column(Integer, ForeignKey("car.id"))
+    team_name = Column(String, ForeignKey("team.name"))
+    car_model = Column(String, ForeignKey("car.model"))
 
     car = relationship("Car", back_populates="car_team")
     team = relationship("Team", back_populates="car_team")

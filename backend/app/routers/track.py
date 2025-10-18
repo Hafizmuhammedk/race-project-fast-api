@@ -1,10 +1,10 @@
 from fastapi import APIRouter, Depends, HTTPException  # responses
 from fastapi.responses import JSONResponse
-from config.database import get_db
-from schema.schemas import TrackCreate
+from app.config.database import get_db
+from app.schema.schemas import TrackCreate
 from sqlalchemy.orm import Session
 from typing import List
-from services.track_management import (
+from app.services.track_management import (
     Creat_Track,
     Get_Track,
     Update_Track,

@@ -1,6 +1,6 @@
 from sqlalchemy.orm import Session
-from schema import schemas
-from models.car_team import Team
+from app.schema import schemas
+from app.models.car_team import Team
 
 
 def Create_Team(db: Session, team_data):

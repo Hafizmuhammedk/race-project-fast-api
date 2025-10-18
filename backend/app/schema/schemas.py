@@ -25,8 +25,8 @@ class Winner(BaseModel):
 
 
 class Car_team(BaseModel):
-    team: str
-    car: str
+    team_name: str
+    car_model: str
 
 
 class Winner_year(BaseModel):

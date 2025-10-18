@@ -1,5 +1,5 @@
 from sqlalchemy import Column, Integer, String, Float
-from config.database import Base
+from app.config.database import Base
 
 
 class Track(Base):

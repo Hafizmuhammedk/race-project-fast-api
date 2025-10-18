@@ -1,10 +1,10 @@
 from fastapi import APIRouter, Depends   # HTTPException  # responses
 from fastapi.responses import JSONResponse
-from config.database import get_db
-from schema.schemas import Car
+from app.config.database import get_db
+from app.schema.schemas import Car
 from sqlalchemy.orm import Session
 from typing import List
-from services.car_management import (
+from app.services.car_management import (
     Create_Car,
     Get_car,
     Get_Car_by,
