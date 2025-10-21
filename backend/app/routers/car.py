@@ -16,9 +16,9 @@ router = APIRouter()
 
 
 @router.post("/car", response_model=Car)
-def create_car(car: Car, db: Session = Depends(get_db)):
+def create_car(team_id: str, car: Car, db: Session = Depends(get_db)):
     try:
-        return Create_Car(db, car)
+        return Create_Car(team_id, db, car)
     except Exception as e:
         return JSONResponse(
             {"error": f"error in creating:{str(e)}"},

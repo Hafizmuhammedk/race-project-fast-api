@@ -1,14 +1,19 @@
 from sqlalchemy.orm import Session
 from app.schema import schemas
-from app.models.car_team import Car
+from app.models.car_team import Car, Car_team, Team
 
 
-def Create_Car(db: Session, car_data):
+def Create_Car(team_id: str, db: Session, car: schemas.Car):
+    db_team = db.query(Team).filter(Team.name == team_id).first()
     try:
-        db_car = Car(model=car_data.model)
+        db_car = Car(model=car.model)
         db.add(db_car)
         db.commit()
         db.refresh(db_car)
+        db_car_team = Car_team(car_model=db_car.model, team_name=db_team.name)
+        db.add(db_car_team)
+        db.commit()
+        db.refresh(db_car_team)
         return db_car
     except Exception as e:
         print(f"creation faild: {str(e)}")

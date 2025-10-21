@@ -3,10 +3,12 @@ from app.schema import schemas
 from app.models.car_team import Car_team
 
 
-def Create_Car_team(db: Session, car_team_data):
+def Create_Car_team(db: Session, car_team):
     try:
-        db_car_team = Car_team(model=car_team_data.car.model,
-                               name=car_team_data.team.name)
+        db_car_team = Car_team(
+            team_name=car_team.team_name,
+            car_model=car_team.car_model
+         )
         db.add(db_car_team)
         db.commit()
         db.refresh(db_car_team)

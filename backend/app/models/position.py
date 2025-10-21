@@ -14,8 +14,8 @@ class Position(Base):
 class Position_year(Base):
     __tablename__ = "position_year"
     id = Column(Integer, primary_key=True, index=False)
-    winner_id = Column(Integer, ForeignKey("position.id"))
-    position = Column(Integer, nullable=False)
+    position_id = Column(Integer, ForeignKey("position.id"))
+    rank = Column(Integer, nullable=False)
     racers_id = Column(Integer, ForeignKey("racers.id"))
     point = Column(Integer, nullable=False)
 

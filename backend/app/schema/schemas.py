@@ -26,7 +26,23 @@ class Winner(BaseModel):
 
 class Car_team(BaseModel):
     team_name: str
-    car_model: str
+    car: str
+
+
+# class CarTeamBase(BaseModel):
+#     team_name: str
+#     car_model: str
+
+
+# class CarTeamCreate(CarTeamBase):
+#     pass
+
+
+# class CarTeamResponse(CarTeamBase):
+#     id: int
+
+#     class Config:
+#         orm_mode = True
 
 
 class Winner_year(BaseModel):
