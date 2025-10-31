@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, ForeignKey
+from sqlalchemy import Column, Integer, String
 from app.config.database import Base
 from sqlalchemy.orm import relationship
 
@@ -21,16 +21,3 @@ class Team(Base):
 
     racers = relationship("Racer", back_populates="team",
                           cascade="all, delete-orphan")
-    car_teams = relationship("CarTeam", back_populates="team",
-                             cascade="all, delete-orphan")
-
-
-class CarTeam(Base):
-    __tablename__ = "car_team"
-
-    id = Column(Integer, primary_key=True, index=True)
-    team_id = Column(Integer, ForeignKey("team.id"), nullable=False)
-    car_id = Column(Integer, ForeignKey("car.id"), nullable=False)
-
-    team = relationship("Team", back_populates="car_teams")
-    car = relationship("Car", back_populates="car_teams")

@@ -7,8 +7,8 @@ from alembic import context
 
 from app.config.database import Base
 from app.config.settings import settings
-from app.models.car_team import Team, CarTeam, Car
-from app.models.winner import Position, PositionYear
+from app.models.car_team import Team, Car
+from app.models.winner import Winner, WinnerResult
 from app.models.Racers import Racer
 from app.models.track import Track
 
