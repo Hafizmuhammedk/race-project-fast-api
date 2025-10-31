@@ -5,26 +5,32 @@ from sqlalchemy.orm import relationship
 
 class Car(Base):
     __tablename__ = "car"
+
     id = Column(Integer, primary_key=True, index=True)
     model = Column(String, unique=True, nullable=False)
 
-    car_team = relationship("Car_team", back_populates="car")
+    car_teams = relationship("CarTeam", back_populates="car",
+                             cascade="all, delete-orphan")
 
 
 class Team(Base):
     __tablename__ = "team"
+
     id = Column(Integer, primary_key=True, index=True)
-    name = Column(String(length=15), unique=True, nullable=False)
+    name = Column(String(length=50), unique=True, nullable=False)
 
-    car_team = relationship("Car_team", back_populates="team")
-    racers = relationship("Racers", back_populates="team")
+    racers = relationship("Racer", back_populates="team",
+                          cascade="all, delete-orphan")
+    car_teams = relationship("CarTeam", back_populates="team",
+                             cascade="all, delete-orphan")
 
 
-class Car_team(Base):
+class CarTeam(Base):
     __tablename__ = "car_team"
-    id = Column(Integer, primary_key=True, index=True)
-    team_name = Column(String, ForeignKey("team.name"), nullable=False)
-    car_model = Column(String, ForeignKey("car.model"), nullable=False)
 
-    car = relationship("Car", back_populates="car_team")
-    team = relationship("Team", back_populates="car_team")
+    id = Column(Integer, primary_key=True, index=True)
+    team_id = Column(Integer, ForeignKey("team.id"), nullable=False)
+    car_id = Column(Integer, ForeignKey("car.id"), nullable=False)
+
+    team = relationship("Team", back_populates="car_teams")
+    car = relationship("Car", back_populates="car_teams")

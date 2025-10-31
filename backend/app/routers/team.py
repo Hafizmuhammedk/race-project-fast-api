@@ -13,7 +13,7 @@ from app.services.team_management import (
     )
 
 
-router = APIRouter()
+router = APIRouter(prefix="/team", tags=["Team Management"])
 
 
 @router.post("/team", response_model=Team)

@@ -11,9 +11,20 @@ class Team(BaseModel):
     name: str
 
 
-class Racer(BaseModel):
+class RacerBase(BaseModel):
     name: str
-    team: str
+    team_id: int
+
+
+class RacerCreate(RacerBase):
+    pass
+
+
+class RacerResponse(RacerBase):
+    id: int
+
+    class Config:
+        from_attributes = True
 
 
 class Car(BaseModel):
@@ -24,25 +35,24 @@ class Winner(BaseModel):
     year: int
 
 
-class Car_team(BaseModel):
+class Car_teamCreate(BaseModel):
     team_name: str
-    car: str
+    car_model: str
+
+    class Config:
+        from_attributes = True
 
 
-# class CarTeamBase(BaseModel):
-#     team_name: str
-#     car_model: str
+class Car_teamBase(BaseModel):
+    team_name: str
+    car_model: str
 
 
-# class CarTeamCreate(CarTeamBase):
-#     pass
+class Car_teamResponse(Car_teamBase):
+    id: int
 
-
-# class CarTeamResponse(CarTeamBase):
-#     id: int
-
-#     class Config:
-#         orm_mode = True
+    class Config:
+        from_attributes = True
 
 
 class Winner_year(BaseModel):

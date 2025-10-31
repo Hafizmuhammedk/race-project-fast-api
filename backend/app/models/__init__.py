@@ -1,14 +1,14 @@
 from app.models.track import Track
-from app.models.car_team import Team, Car, Car_team
-from app.models.position import Position, Position_year
-from app.models.Racers import Racers
+from app.models.car_team import Team, Car, CarTeam
+from app.models.position import Position, PositionYear
+from app.models.Racers import Racer
 
 __all__ = [
     "Track",
     "Team",
-    "Racers",
+    "Racer",
     "Position",
-    "Car_team",
-    "Position_year",
+    "CarTeam",
+    "PositionYear",
     "Car",
 ]

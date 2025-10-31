@@ -1,9 +1,10 @@
-from fastapi import APIRouter, Depends   # HTTPException  # responses
+from fastapi import APIRouter, Depends
 from fastapi.responses import JSONResponse
-from app.config.database import get_db
-from app.schema.schemas import Car
 from sqlalchemy.orm import Session
 from typing import List
+
+from app.config.database import get_db
+from app.schema.schemas import Car
 from app.services.car_management import (
     Create_Car,
     Get_car,
@@ -12,18 +13,26 @@ from app.services.car_management import (
     Delete_car
 )
 
-router = APIRouter()
+router = APIRouter(prefix="/car", tags=["Car Management"])
 
 
 @router.post("/car", response_model=Car)
-def create_car(team_id: str, car: Car, db: Session = Depends(get_db)):
+def create_car(team_name: str = None, car: Car = None,
+               db: Session = Depends(get_db)):
+
     try:
-        return Create_Car(team_id, db, car)
+        created_car = Create_Car(team_name, db, car)
+        return created_car
+    except ValueError as e:
+        return JSONResponse(
+            {"error": str(e)},
+            status_code=400
+        )
     except Exception as e:
         return JSONResponse(
-            {"error": f"error in creating:{str(e)}"},
-            status_code=404
-            )
+            {"error": f"Unexpected error: {str(e)}"},
+            status_code=500
+        )
 
 
 @router.get("/car", response_model=List[Car])
@@ -32,7 +41,7 @@ def get_car(db: Session = Depends(get_db)):
         return Get_car(db)
     except Exception as e:
         return JSONResponse(
-            {"error": f"not found:{str(e)}"},
+            {"error": f"not found: {str(e)}"},
             status_code=404
         )
 
@@ -43,24 +52,24 @@ def car_by_id(car_id: int, db: Session = Depends(get_db)):
         return Get_Car_by(db, car_id)
     except Exception as e:
         return JSONResponse(
-            {"error": f"not found:{str(e)}"},
+            {"error": f"not found: {str(e)}"},
             status_code=404
         )
 
 
 @router.put("/car", response_model=Car)
-def update_car(car_id: int, car_update: Car,
-               db: Session = Depends(get_db)):
+def update_car(car_id: int, car_update: Car, db: Session = Depends(get_db)):
     try:
         db_car = Update_Car(db, car_id, car_update)
         if not db_car:
-            return {"message": "car not updated"}
+            return JSONResponse({"message": "car not updated"},
+                                status_code=404)
         return JSONResponse({"message": "updated Successfully"},
                             status_code=200)
     except Exception as e:
         return JSONResponse(
-            {"error": f"not updated:{str(e)}"},
-            status_code=404
+            {"error": f"not updated: {str(e)}"},
+            status_code=400
         )
 
 
@@ -69,9 +78,12 @@ def delete_car(car_id: int, db: Session = Depends(get_db)):
     try:
         db_car = Delete_car(db, car_id)
         if not db_car:
-            return {"message": "car not found"}
+            return JSONResponse({"message": "car not found"},
+                                status_code=404)
         return JSONResponse({"message": "deleted Successfully"},
                             status_code=200)
     except Exception as e:
-        return JSONResponse(detail={"error": f"Error in deleting:{str(e)}"},
-                            status_code=404)
+        return JSONResponse(
+            {"error": f"Error in deleting: {str(e)}"},
+            status_code=400
+        )

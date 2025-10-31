@@ -9,7 +9,7 @@ from app.config.database import Base
 from app.config.settings import settings
 from app.models.car_team import Team, Car_team, Car
 from app.models.position import Position, Position_year
-from app.models.Racers import Racers
+from app.models.Racers import Racer
 from app.models.track import Track
 
 # this is the Alembic Config object, which provides

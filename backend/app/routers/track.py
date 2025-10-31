@@ -13,7 +13,7 @@ from app.services.track_management import (
     )
 
 
-router = APIRouter()
+router = APIRouter(prefix="/track", tags=["Track Management"])
 
 
 @router.post("/track", response_model=TrackCreate)
