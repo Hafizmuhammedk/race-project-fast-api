@@ -7,8 +7,11 @@ from app.routers.team import router as team_api
 from app.routers.car import router as car_api
 from app.routers.car_connection import router as carteam_api
 from app.routers.racers import router as racer_api
-app = FastAPI()
+from app.routers.winner import router as winners_api
+from app.routers.winner import router as winner1_api
 
+
+app = FastAPI()
 
 Base.metadata.create_all(bind=engine)
 
@@ -17,3 +20,5 @@ app.include_router(team_api)
 app.include_router(car_api)
 app.include_router(carteam_api)
 app.include_router(racer_api)
+app.include_router(winners_api)
+app.include_router(winner1_api)

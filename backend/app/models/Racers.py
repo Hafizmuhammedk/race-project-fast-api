@@ -11,7 +11,5 @@ class Racer(Base):
     name = Column(String(length=50), nullable=False)
     team_id = Column(Integer, ForeignKey("team.id"))
 
-    # must match Position_year.back_populates="racers"
-    position_years = relationship("PositionYear", back_populates="racers",
-                                  cascade="all, delete-orphan")
+    winner_results = relationship("WinnerResult", back_populates="racer")
     team = relationship("Team", back_populates="racers")

@@ -55,7 +55,34 @@ class Car_teamResponse(Car_teamBase):
         from_attributes = True
 
 
-class Winner_year(BaseModel):
+class WinnerBase(BaseModel):
+    year: int
+
+
+class WinnerCreate(WinnerBase):
+    pass
+
+
+class WinnerResponse(WinnerBase):
+    id: int
+
+    class Config:
+        from_attributes = True
+
+
+class WinnerResultBase(BaseModel):
+    winner_id: int
     position: int
-    racers: str
-    point: int
+    racer_id: int
+    points: int
+
+
+class WinnerResultCreate(WinnerResultBase):
+    pass
+
+
+class WinnerResultResponse(WinnerResultBase):
+    id: int
+
+    class Config:
+        from_attributes = True
