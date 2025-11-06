@@ -23,7 +23,8 @@ def get_winners(db: Session = Depends(get_db)):
 
 
 @router.post("/results", response_model=WinnerResultResponse)
-def create_winner_result(payload: WinnerResultCreate, db: Session = Depends(get_db)):
+def create_winner_result(payload: WinnerResultCreate,
+                         db: Session = Depends(get_db)):
     return service.create_winner_result(db, payload)
 
 

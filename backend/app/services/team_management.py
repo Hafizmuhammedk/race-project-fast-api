@@ -1,14 +1,22 @@
 from sqlalchemy.orm import Session
 from app.schema import schemas
 from app.models.car_team import Team
+from fastapi import HTTPException, status
 
 
-def Create_Team(db: Session, team_data):
-    db_racer = Team(name=team_data.name)
-    db.add(db_racer)
+def Create_Team(db, team):
+    existing_team = db.query(Team).filter(Team.name == team.name).first()
+    if existing_team:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail=f"Team '{team.name}' already exists."
+        )
+
+    new_team = Team(name=team.name)
+    db.add(new_team)
     db.commit()
-    db.refresh(db_racer)
-    return db_racer
+    db.refresh(new_team)
+    return new_team
 
 
 def Get_Team(db: Session):
