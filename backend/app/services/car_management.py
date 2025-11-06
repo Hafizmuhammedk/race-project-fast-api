@@ -1,6 +1,6 @@
 from sqlalchemy.orm import Session
 from app.models.car_team import Car as CarModel
-from app.models.car_team import Team as TeamModel
+# from app.models.car_team import Team as TeamModel
 
 
 def Create_Car(team_name: str, db: Session, car):
